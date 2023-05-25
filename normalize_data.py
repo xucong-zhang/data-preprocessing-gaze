@@ -20,6 +20,22 @@ import numpy as np
 import csv
 import scipy.io as sio
 
+def draw_gaze(image_in, pitchyaw, thickness=2, color=(0, 0, 255)):
+    """Draw gaze angle on given image with a given eye positions."""
+    image_out = image_in
+    (h, w) = image_in.shape[:2]
+    length = np.min([h, w]) / 2.0
+    pos = (int(w / 2.0), int(h / 2.0))
+    if len(image_out.shape) == 2 or image_out.shape[2] == 1:  # to draw on the image, we need to convert to RGB
+        image_out = cv2.cvtColor(image_out, cv2.COLOR_GRAY2BGR)
+    dx = -length * np.sin(pitchyaw[1]) * np.cos(pitchyaw[0])
+    dy = -length * np.sin(pitchyaw[0])
+    cv2.arrowedLine(image_out, tuple(np.round(pos).astype(int)),
+                   tuple(np.round([pos[0] + dx, pos[1] + dy]).astype(int)), color,
+                   thickness, cv2.LINE_AA, tipLength=0.2)
+
+    return image_out
+
 def estimateHeadPose(landmarks, face_model, camera, distortion, iterate=True):
     ret, rvec, tvec = cv2.solvePnP(face_model, landmarks, camera, distortion, flags=cv2.SOLVEPNP_EPNP)
 
@@ -135,6 +151,7 @@ if __name__ == '__main__':
 
     # show normalized image
     img_normalized = data[0][0]
+    img_normalized = draw_gaze(img_normalized, np.array([gaze_theta[0], gaze_phi[0]]))
     cv2.imshow('image', img_normalized)
     cv2.waitKey(0)
     cv2.destroyAllWindows()

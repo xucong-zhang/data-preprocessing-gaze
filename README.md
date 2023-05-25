@@ -4,13 +4,18 @@ Updated code for paper "Revisiting Data Normalization for Appearance-Based Gaze 
 ## Update item
 Comapring to the [original website](https://www.mpi-inf.mpg.de/departments/computer-vision-and-machine-learning/research/gaze-based-human-computer-interaction/revisiting-data-normalization-for-appearance-based-gaze-estimation), we updated the following items.
 
-[25th May, 2023] Bug fixed in the output line. 
+[25th May, 2023]:
+
+* Bug fixed in the output line. 
+* Change the camera calibration file from .mat to .xml. 
+* Change the face model file from .mat to .txt file. 
+* Add a draw gaze function to visualize the gaze direction.
 
 ## License
 The code is under the license of [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ## Citation
-If using this code-base and/or the ETH-XGaze dataset in your research, please cite the following publication:
+If using this code-base in your research, please cite the following publication:
 
     @inproceedings{zhang2018revisiting,
         title={Revisiting data normalization for appearance-based gaze estimation},
@@ -19,3 +24,5 @@ If using this code-base and/or the ETH-XGaze dataset in your research, please ci
         pages={1--9},
         year={2018}
     }
+
+Please note you should only cite the above publication if you merely re-implement our code-base.

@@ -47,7 +47,7 @@ def normalizeData(img, face, hr, ht, gc, cam):
     
     ## normalize each eye
     data = []
-    for et in [re, le]:
+    for et in [re, le]:  ## right eye and then left eye
         ## ---------- normalize image ----------
         distance = np.linalg.norm(et) # actual distance between eye and original camera
         
@@ -123,11 +123,15 @@ if __name__ == '__main__':
     data = normalizeData(img, face, hr, ht, gc, camera_matrix)
 
     # show results of right eye image
-    label = data[0][1]
+    label = data[0][2]
+    head_pose_right = data[0][1]
+    head_pose_left = data[1][1]
+    gaze_right = data[0][2]
+    gaze_left = data[1][2]
     print('The label is: ', label)
     # convert label to euler angle
-    gaze_theta = np.arcsin((-1) * label[1])
-    gaze_phi = np.arctan2((-1) * label[0], (-1) * label[2])
+    gaze_theta = np.arcsin((-1) * gaze_right[1])
+    gaze_phi = np.arctan2((-1) * gaze_right[0], (-1) * gaze_right[2])
 
     # show normalized image
     img_normalized = data[0][0]

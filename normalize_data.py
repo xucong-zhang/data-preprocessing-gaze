@@ -111,9 +111,9 @@ def normalizeData(img, face, hr, ht, gc, cam):
 
 if __name__ == '__main__':
     ## load calibration data, these paramters can be obtained by camera calibration functions in OpenCV
-    cameraCalib = sio.loadmat('./data/calibration/cameraCalib.mat')
-    camera_matrix = cameraCalib['cameraMatrix']
-    camera_distortion = cameraCalib['distCoeffs']
+    fid = cv2.FileStorage('./data/calibration/cameraCalib.xml', cv2.FileStorage_READ)
+    camera_matrix = fid.getNode("camera_matrix").mat()
+    camera_distortion = fid.getNode("cam_distortion").mat()
 
     # load example
     filepath = os.path.join('./data/example/day01_0087.jpg')
@@ -123,11 +123,12 @@ if __name__ == '__main__':
     # this code does not contain facial landmark detection
     landmarks = np.array([[551, 408], [603, 405], [698, 398], [755, 393], [603, 566], [724, 557]])
 
-    # estimate head pose
     # load the generic face model, which includes 6 facial landmarks: four eye corners and two mouth corners
-    face = sio.loadmat('./data/faceModelGeneric.mat')['model']
+    face = np.loadtxt('./data/faceModelGeneric.txt')
     num_pts = face.shape[1]
     facePts = face.T.reshape(num_pts, 1, 3)
+
+    # estimate head pose
     landmarks = landmarks.astype(np.float32)
     landmarks = landmarks.reshape(num_pts, 1, 2)
     hr, ht = estimateHeadPose(landmarks, facePts, camera_matrix, camera_distortion)

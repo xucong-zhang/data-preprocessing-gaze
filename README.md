@@ -26,7 +26,9 @@ We were preparing the camera-ready version of the MPIIFaceGaze dataset paper [5]
 
 After 2017, all of my gaze estimation papers (listed on my personal webpage and google scholar) conducted the experiments on the normalized MPIIFaceGaze dataset downloaded from [our website](https://www.mpi-inf.mpg.de/departments/computer-vision-and-machine-learning/research/gaze-based-human-computer-interaction/its-written-all-over-your-face-full-face-appearance-based-gaze-estimation/), which does not use the scaling factor on the gaze direction. We directly compare our later methods with the number reported in [5] for the MPIIFaceGaze dataset due to the fact that these numbers are in the original camera space. However, we did not update experiment results for the MPIIGaze dataset [3] and the TPAMI extension [6], since it was already published. In other words, the gaze estimation errors reported in MPIIGaze [3] and [6] are in the scaled normalized space, and they are not directly comparable to results in the MPIIFaceGaze paper [5] which are in the original camera space. BTW, the main difference between MPIIGaze and MPIIFaceGaze is that MPIIGaze only has the eye region, and MPIIFaceGaze has the full-face images.
 
-In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods used the same process. Using data normalization or not, using scaling factor on gaze direction or not, does not affect the ranking of method performances. It is only caused problems when comparing methods with different pre-processing that we should pay attention to.
+Seonwook Park improved the data normalization with a better head pose estimation in [7], and he made effort to make the GazeCapture dataset [8] to a the same normalized space. The pre-processing code can be found in the [Github code](https://github.com/swook/faze_preprocess/tree/5c33caaa1bc271a8d6aad21837e334108f293683).
+
+In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods used the same process. Using data normalization or not, using scaling factor on gaze direction or not, does not affect the performance ranking of methods. It only causes problems when comparing methods with different pre-processing that we should pay attention to.
 
 
 ### References
@@ -35,8 +37,9 @@ In principle, you are free to develop your gaze estimation method with any pre-p
 [3] Appearance-Based Gaze Estimation in the Wild. Zhang et al. CVPR 2015.\
 [4] Revisiting Data Normalization for Appearance-Based Gaze Estimation. Zhang et al. ETRA 2018.\
 [5] It’s Written All Over Your Face: Full-Face Appearance-Based Gaze Estimation. Zhang et al. CVPR workshop 2017.\
-[6] MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation. Zhang et al. TPAMI 2017.
-
+[6] MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation. Zhang et al. TPAMI 2017.\
+[7] Few-Shot Adaptive Gaze Estimation. Park et al. ICCV 2019.\
+[8] Eye Tracking for Everyone. Krafka et al. CVPR 2016.
 
 ## License
 The code is under the license of [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/)
@@ -52,4 +55,3 @@ Please cite the following publication if you use the code-base in your research:
         year={2017}
     }
 
-Please note you should only cite the above publication if you merely re-implement our code-base.

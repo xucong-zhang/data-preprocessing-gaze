@@ -47,28 +47,29 @@ def estimateHeadPose(landmarks, face_model, camera, distortion, iterate=True):
 
 def normalizeData(img, face, hr, ht, gc, cam):
     ## normalized camera parameters
+    # To change the image size, you need to modify the roiSize parameter, and then adjust focal_norm and distance_norm accordingly.
     focal_norm = 960 # focal length of normalized camera
     distance_norm = 600 # normalized distance between eye and camera
     roiSize = (60, 36) # size of cropped eye image
 
-    img_u = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img_u = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # convert to grayscale, feel free to remove it.
 
     ## compute estimated 3D positions of the landmarks
-    ht = ht.reshape((3,1))
-    gc = gc.reshape((3,1))
+    ht = ht.reshape((3,1)) # head translation vector
+    gc = gc.reshape((3,1)) # gaze direction vector
     hR = cv2.Rodrigues(hr)[0] # rotation matrix
     Fc = np.dot(hR, face) + ht # 3D positions of facial landmarks
     re = 0.5*(Fc[:,0] + Fc[:,1]).reshape((3,1)) # center of left eye
     le = 0.5*(Fc[:,2] + Fc[:,3]).reshape((3,1)) # center of right eye
     
     ## normalize each eye
-    data = []
-    for et in [re, le]:  ## right eye and then left eye
+    data = []  # variable to save normalized data
+    for et in [re, le]:  ## right eye first and then left eye
         ## ---------- normalize image ----------
         distance = np.linalg.norm(et) # actual distance between eye and original camera
         
         z_scale = distance_norm/distance
-        cam_norm = np.array([
+        cam_norm = np.array([  # camera matrix of normalized camera
             [focal_norm, 0, roiSize[0]/2],
             [0, focal_norm, roiSize[1]/2],
             [0, 0, 1.0],
@@ -90,7 +91,7 @@ def normalizeData(img, face, hr, ht, gc, cam):
         W = np.dot(np.dot(cam_norm, S), np.dot(R, np.linalg.inv(cam))) # transformation matrix
         
         img_warped = cv2.warpPerspective(img_u, W, roiSize) # image normalization
-        img_warped = cv2.equalizeHist(img_warped)
+        img_warped = cv2.equalizeHist(img_warped)  # a post-processing step, feel free to remove it.
         
         ## ---------- normalize rotation ----------
         hR_norm = np.dot(R, hR) # rotation matrix in normalized space
@@ -98,12 +99,12 @@ def normalizeData(img, face, hr, ht, gc, cam):
         
         ## ---------- normalize gaze vector ----------
         gc_normalized = gc - et # gaze vector
-        # For modified data normalization, scaling is not applied to gaze direction, so here is only R applied.
-        # For original data normalization, here should be:
+        # For new data normalization in our ETRA 2018 paper, scaling is not applied to gaze direction, so here is only R applied.
+        # For original data normalization, the following line should be:
         # "M = np.dot(S,R)
-        # gc_normalized = np.dot(R, gc_normalized)"
+        # gc_normalized = np.dot(M, gc_normalized)"
         gc_normalized = np.dot(R, gc_normalized)
-        gc_normalized = gc_normalized/np.linalg.norm(gc_normalized)
+        gc_normalized = gc_normalized/np.linalg.norm(gc_normalized)  # normalize gaze vector, it is important!
         
         data.append([img_warped, hr_norm, gc_normalized])
         

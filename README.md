@@ -16,6 +16,8 @@ Numpy\
 Opencv-Python
 
 ## History of data normalization for gaze estimation
+*Written by [Xucong Zhang](https://www.ccmitss.com/zhang)*
+
 The original idea of data normalization was proposed in [1] as a way of synthesizing eye images, at which time it was referred to as "rectify" eye images. It was further developed in [2] for the same purpose with detailed steps. Introduced by Yusuke Sugano, we used the same operations in [2] for the pre-processing of MPIIGaze dataset [3], and we gave the name of this pre-processing as "data normalization". I admit that it is not a good name.
 
 Around 2017, we sensed that the scaling operation might not be used for the gaze direction normalization. Mathematically, the gaze direction should also be scaled given the whole normalized space is scaled by the focal length of the virtual camera, instead of physically moving the virtual camera towards the eye. However, we do not need to scale the gaze direction if we assume the eye is a 2D planar, given the long distance between the real camera and the eye. After multiple discussions at length, we decided to verify our ideas with experiments, which result in an ETRA paper [4] concluded that we should NOT apply the scaling factor to the gaze direction. In short, the absolute gaze estimation error would be scaled according to the "real distance between the real camera and eye" and the "distance between the virtual camera and eye". For the MPIIGaze and MPIIFaceGaze datasets, the gaze estimation error becomes smaller if the scaling factor is applied during the data normalization. 
@@ -27,7 +29,7 @@ After 2017, all of my gaze estimation papers (listed on my personal webpage and 
 In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods used the same process. Using data normalization or not, using scaling factor on gaze direction or not, does not affect the ranking of method performances. It is only caused problems when comparing methods with different pre-processing that we should pay attention to.
 
 
-## References
+### References
 [1] Head Pose-Free Appearance-Based Gaze Sensing via Eye Image Synthesis. Lu et al. ICPR 2012.\
 [2] Learning-by-Synthesis for Appearance-based 3D Gaze Estimation. Sugano et al. CVPR 2014.\
 [3] Appearance-Based Gaze Estimation in the Wild. Zhang et al. CVPR 2015.\

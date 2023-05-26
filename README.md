@@ -32,7 +32,7 @@ In principle, you are free to develop your gaze estimation method with any pre-p
 [2] Learning-by-Synthesis for Appearance-based 3D Gaze Estimation. Sugano et al. CVPR 2014.\
 [3] Appearance-Based Gaze Estimation in the Wild. Zhang et al. CVPR 2015.\
 [4] Revisiting Data Normalization for Appearance-Based Gaze Estimation. Zhang et al. ETRA 2018.\
-[5] It’s Written All Over Your Face: Full-Face Appearance-Based Gaze Estimation. Zhang et al. CVPR workshop 2017.\  
+[5] It’s Written All Over Your Face: Full-Face Appearance-Based Gaze Estimation. Zhang et al. CVPR workshop 2017.\
 [6] MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation. Zhang et al. TPAMI 2017.
 
 

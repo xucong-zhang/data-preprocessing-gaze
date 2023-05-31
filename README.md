@@ -47,11 +47,11 @@ The code is under the license of [CC BY-NC-SA 4.0 license](https://creativecommo
 ## Citation
 Please cite the following publication if you use the code-base in your research:
 
-    @inproceedings{zhang2017mpiigaze,
-        title={MPIIGaze: Real-World Dataset and Deep Appearance-Based Gaze Estimation},
-        author={Zhang, Xucong and Sugano, Yusuke and Fritz, Mario and Bulling, Andreas},
-        booktitle={Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition},
-        pages={1--11},
-        year={2017}
+    @inproceedings{zhang2018revisiting,
+        title={Revisiting data normalization for appearance-based gaze estimation},
+        author={Zhang, Xucong and Sugano, Yusuke and Bulling, Andreas},
+        booktitle={Proceedings of the 2018 ACM symposium on eye tracking research \& applications},
+        pages={1--9},
+        year={2018}
     }
 

@@ -28,7 +28,7 @@ After 2017, experiments on the MPIIFaceGaze dataset on all of my gaze estimation
 
 Seonwook Park improved the data normalization with a better head pose estimation in [7], and he made effort to make the GazeCapture dataset [8] to a the same normalized space. The pre-processing code can be found in the [Github code](https://github.com/swook/faze_preprocess/tree/5c33caaa1bc271a8d6aad21837e334108f293683).
 
-In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods used the same process. Using data normalization or not, using scaling factor on gaze direction or not, does not affect the performance ranking of methods. It only causes problems when comparing methods with different pre-processing that we should pay attention to.
+In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods use the same process. Using data normalization or not, using scaling factor on gaze direction or not, does not affect the performance ranking of methods. It may only cause problems when comparing methods with different pre-processing that we should pay attention to.
 
 
 ### References

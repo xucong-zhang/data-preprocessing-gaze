@@ -30,6 +30,8 @@ Seonwook Park improved the data normalization with a better head pose estimation
 
 In principle, you are free to develop your gaze estimation method with any pre-processing in your favor, as long as the comparison of different methods use the same process. It may only cause problems when comparing methods with different pre-processing that we should pay attention to.
 
+If you are interested in conducting experiments on ETH-XGaze, MPIIFaceGaze and Gaze360 datasets with the same normalization method, you can refer to our another [code repository](https://github.com/X-Shi/Data-Normalization-Gaze-Estimation).
+
 ### References
 [1] Head Pose-Free Appearance-Based Gaze Sensing via Eye Image Synthesis. Lu et al. ICPR 2012.\
 [2] Learning-by-Synthesis for Appearance-based 3D Gaze Estimation. Sugano et al. CVPR 2014.\
